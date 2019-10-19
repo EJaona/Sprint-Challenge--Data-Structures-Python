@@ -1,28 +1,16 @@
+
 class RingBuffer:
   def __init__(self, capacity):
     self.capacity = capacity
     self.current = 0
-    self.storage = [None]*capacity
+    self.storage = [None]*capacity # initialize storage
 
   def append(self, item):
-      if self.current == self.capacity:
-        # self.current = 0
-        # self.storage[self.current] = item
-        # self.current += 1
-        self.storage[0] = item
-
-        print('full', self.storage)
-      else:
-        self.storage[self.current] = item
-        self.current += 1
-
+    self.storage[self.current] = item # put the item into storage
+    if self.current < self.capacity - 1: # if the current is less than max capacity
+      self.current += 1 # increment current
+    else:
+      self.current = 0 # if max capacity reset to 0
 
   def get(self):
-      print('storage not full',self.storage[: self.current])
-      return self.storage[: self.current]
-    # if self.storage[self.current] == None:
-    #   print('storage not full',self.storage[: self.current])
-    #   return self.storage[: self.current]
-    # else:
-    #   print('storage full', self.storage[: self.capacity])
-    #   # return self.storage[: self.capacity]
+    return [item for item in self.storage if item != None]
